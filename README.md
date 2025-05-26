@@ -10,9 +10,28 @@
   Penetapan biaya medis yang akurat adalah fondasi dari sistem asuransi yang berkelanjutan. Tanpa pendekatan prediktif, perusahaan asuransi bisa mengalami kerugian akibat klaim berlebih atau justru membebani pelanggan dengan premi yang terlalu tinggi.
   
 ### 💼 2. Business Understanding
-- **Problem Statement**
+- **Problem Statement**  
   Bagaimana memprediksi biaya medis seseorang berdasarkan usia, BMI, jenis kelamin, status merokok, jumlah anak, dan wilayah tempat tinggal?
- - **Goals**
+ - **Goals**  
    Mengembangkan model machine learning yang dapat memprediksi biaya medis secara akurat berdasarkan data profil pasien.
   - **Solution Statement**
-    
+    1. Baseline model: Linear Regression sebagai model awal.
+    2. Alternative model: Random Forest dan XGBoost Regressor untuk mengeksplorasi akurasi yang lebih tinggi.
+    3. Improvement: Hyperparameter tuning pada model terbaik untuk meningkatkan performa prediksi.  
+    Metrik evaluasi yang digunakan:
+    - MAE (Mean Absolute Error)
+    - RMSE (Root Mean Squared Error)
+    - R² Score
+
+### 📊 3. Data Understanding
+- **Sumber Data**: [Medical Cost Personal Datasets](https://www.kaggle.com/datasets/mirichoi0218/insurance)
+- **Jumlah Data**: 1338 baris, 7 fitur input, 1 target (`charges`)
+- **Fitur / Kolom**
+  + `age`: usia pasien (numerik)
+  + `sex`: jenis kelamin (kategorikal)
+  + `bmi`: body mass index (numerik)
+  + `children`: jumlah anak (numerik)
+  + `smoker`: apakah pasien merokok (kategorikal: yes/no)
+  + `region`: lokasi geografis (kategorikal)
+  + `charges`: biaya pengobatan (target)
+
