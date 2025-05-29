@@ -43,7 +43,7 @@ Model terbaik dipilih berdasarkan evaluasi terhadap metrik MAE, RMSE, dan R².
 ## 📊 Data Understanding
 
 - **Sumber Data**: [Medical Cost Personal Dataset (Kaggle)](https://www.kaggle.com/datasets/mirichoi0218/insurance)
-- **Jumlah Data**: 1338 baris, 7 fitur input, 1 target (`charges`)
+- **Jumlah Data**: 1338 baris, 6 fitur input, 1 target (`charges`)
 - **Fitur / Kolom**:
   - `age`: usia pasien
   - `sex`: jenis kelamin (`male`, `female`)
@@ -52,6 +52,13 @@ Model terbaik dipilih berdasarkan evaluasi terhadap metrik MAE, RMSE, dan R².
   - `smoker`: apakah pasien perokok (`yes`, `no`)
   - `region`: wilayah tempat tinggal (`northeast`, `southeast`, dll)
   - `charges`: biaya pengobatan (target regresi)
+- **Kondisi Data**:
+  - Missing Values: Tidak ditemukan missing value pada seluruh kolom `(df.isnull().sum()` menunjukkan nol untuk semua fitur).
+  - Statistik Ringkasan (berdasarkan `df.describe()`):
+    - `age`: mean 39.2, min 18, max 64
+    - `bmi`: mean 30.66, min 15.96, max 53.13
+    - `children`: mean 1.09, min 0, max 5
+    - `charges`: mean $13,270, min $1,121, max $63,770
 
 ---
 
@@ -70,17 +77,19 @@ Model terbaik dipilih berdasarkan evaluasi terhadap metrik MAE, RMSE, dan R².
 
 ## 🤖 Modeling
 
-### 🔍 Model yang Digunakan:
+### 🔍 Model yang Digunakan dan Cara Kerja:
 1. **Linear Regression**
+   - Mencari hubungan linier antara fitur dan target dengan meminimalkan fungsi error (ordinary least squares).
    - Default parameter dari `sklearn.linear_model.LinearRegression`
-2. **Random Forest Regressor**
-   - Estimators: `n_estimators=100`
-   - Depth dibatasi otomatis oleh data
-3. **XGBoost Regressor**
-   - Estimators: `n_estimators=100`
-   - Learning rate: `0.1`
-   - Max depth: `3`
-   - Booster: `'gbtree'`
+3. **Random Forest Regressor**
+   - Membuat banyak pohon keputusan (decision trees) pada subset acak data.
+   - Prediksi akhir dihitung sebagai rata-rata dari semua pohon.
+   - Mengurangi overfitting dan baik untuk data non-linear.
+   - Parameter: `n_estimators=100`, `max_depth=10`, `random_state=42`.
+5. **XGBoost Regressor**
+   - Model boosting yang membangun pohon secara berurutan.
+   - Tiap pohon baru memperbaiki kesalahan dari pohon sebelumnya dengan mengoptimasi fungsi loss.
+   - Parameter: `n_estimators=100`, `learning_rate=0.1`, `random_state=42`, `max_depth` default `max_depth=6`, `booster` default `booster='gbtree'`.
 
 ### ⚙️ Alasan Pemilihan Model:
 - **Linear Regression** digunakan sebagai baseline karena mudah dipahami.
