@@ -89,7 +89,7 @@ Model terbaik dipilih berdasarkan evaluasi terhadap metrik MAE, RMSE, dan R².
 5. **XGBoost Regressor**
    - Model boosting yang membangun pohon secara berurutan.
    - Tiap pohon baru memperbaiki kesalahan dari pohon sebelumnya dengan mengoptimasi fungsi loss.
-   - Parameter: `n_estimators=100`, `learning_rate=0.1`, `random_state=42`, `max_depth` default `max_depth=6`, `booster` default `booster='gbtree'`.
+   - Parameter: `n_estimators=100`, `learning_rate=0.1`, `random_state=42`.
 
 ### ⚙️ Alasan Pemilihan Model:
 - **Linear Regression** digunakan sebagai baseline karena mudah dipahami.
